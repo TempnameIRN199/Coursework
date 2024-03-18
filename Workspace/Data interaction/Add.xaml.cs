@@ -515,23 +515,6 @@ namespace Coursework.Workspace.Data_interaction
                 _textBox.Style = (Style)FindResource("CustomTextBoxStyle");
                 _gridAdded.Children.Add(_textBox);
 
-                //CreateLabel("Issue", 2);
-                //
-                //ComboBox _comboBox1 = new ComboBox();
-                //Grid.SetRow(_comboBox1, 3);
-                //_comboBox1.Name = "_comboBoxIssue";
-                //_comboBox1.Margin = new Thickness(10, 10, 10, 10);
-                //_comboBox1.HorizontalAlignment = HorizontalAlignment.Stretch;
-                //_comboBox1.VerticalAlignment = VerticalAlignment.Center;
-                //_comboBox1.FontSize = 20;
-                //_comboBox1.FontFamily = new FontFamily("Cascadia Mono ExtraLight");
-                //using (NintendoContext db = new NintendoContext())
-                //{
-                //    var issueNames = db.Issues.Select(x => x.EssenceOfIssue);
-                //    _comboBox1.ItemsSource = issueNames.ToList();
-                //}
-                //_gridAdded.Children.Add(_comboBox1);
-
                 Button _btnAdd = new Button();
                 Grid.SetRow(_btnAdd, 2);
                 _btnAdd.Name = "_btnAddTicket";
@@ -659,6 +642,7 @@ namespace Coursework.Workspace.Data_interaction
         private void _btnAddGroup_Click(object sender, RoutedEventArgs e)
         {
             CheckGroup(new Group { Name = ((TextBox)_gridAdded.Children[0]).Text });
+            this.Close();
         }
 
         private void _btnImagePath_Click(object sender, RoutedEventArgs e)
@@ -766,7 +750,6 @@ namespace Coursework.Workspace.Data_interaction
                 // если все поля пустые - выдать ошибку
                 if (((TextBox)_gridAdded.Children[1]).Text == "" || 
                     ((TextBox)_gridAdded.Children[3]).Text == "" || 
-                    ((TextBox)_gridAdded.Children[5]).Text == "" || 
                     ((TextBox)_gridAdded.Children[7]).Text == "")
                 {
                     MessageBox.Show("Заповніть всі поля");
@@ -782,8 +765,7 @@ namespace Coursework.Workspace.Data_interaction
                     student.GroupId = group.Id;
                     var user = context.Users.Where(x => x.Login == _comboBox.SelectedItem.ToString()).FirstOrDefault();
                     student.UserId = user.Id;
-                    if (context.Students.Any(x => x.Surname == student.Surname && x.Name == student.Name &&
-                    x.Patronymic == student.Patronymic))
+                    if (context.Students.Any(x => x.Surname == student.Surname && x.Name == student.Name))
                     {
                         MessageBox.Show("Такий студент вже існує");
                         ((TextBox)_gridAdded.Children[1]).Text = "";

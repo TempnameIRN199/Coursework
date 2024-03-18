@@ -64,7 +64,54 @@ namespace Coursework.Workspace.UserWindow
 
         private void _btnSave_Click(object sender, RoutedEventArgs e)
         {
+            Microsoft.Office.Interop.Word.Application app = new Microsoft.Office.Interop.Word.Application();
+            Document doc = app.Documents.Add();
+            using (NintendoContext db = new NintendoContext())
+            {
+                var ticketName = db.Tickets.
+                    Join(db.Issues, ticket => ticket.Id, issue => issue.TicketId, (ticket, issue) => new { ticket, issue }).
+                    Where(x => x.issue.EssenceOfIssue == _txt1.Text || x.issue.EssenceOfIssue == _txt2.Text || x.issue.EssenceOfIssue == _txt3.Text).
+                    Select(x => x.ticket.Name).
+                    FirstOrDefault();
 
+                var firstEssenceOfIssue = db.Issues.Where(x => x.EssenceOfIssue == _txt1.Text).FirstOrDefault();
+                var secondEssenceOfIssue = db.Issues.Where(x => x.EssenceOfIssue == _txt2.Text).FirstOrDefault();
+                var thirdEssenceOfIssue = db.Issues.Where(x => x.EssenceOfIssue == _txt3.Text).FirstOrDefault();
+
+                var imageInIssue = db.Issues.Where(x => x.EssenceOfIssue == _txt1.Text).Select(x => x.ImagePath).FirstOrDefault();
+                var imageInIssue2 = db.Issues.Where(x => x.EssenceOfIssue == _txt2.Text).Select(x => x.ImagePath).FirstOrDefault();
+                var imageInIssue3 = db.Issues.Where(x => x.EssenceOfIssue == _txt3.Text).Select(x => x.ImagePath).FirstOrDefault();
+
+                var studentName = db.Students.Where(x => x.UserId == student.UserId).Select(x => x.Name).FirstOrDefault();
+                var studentSurname = db.Students.Where(x => x.UserId == student.UserId).Select(x => x.Surname).FirstOrDefault();
+                var studentPatronymic = db.Students.Where(x => x.UserId == student.UserId).Select(x => x.Patronymic).FirstOrDefault();
+
+                // Создание таблицы
+                Microsoft.Office.Interop.Word.Table table = doc.Tables.Add(doc.Range(), 12, 1);
+                table.Borders.Enable = 1; // Включаем отображение границ таблицы
+
+                // Установка стиля, цвета и толщины рамки вокруг ячейки
+                table.Borders.OutsideLineStyle = WdLineStyle.wdLineStyleDouble; // Стиль линии
+                table.Borders.OutsideLineWidth = WdLineWidth.wdLineWidth150pt; // Толщина линии
+                table.Borders.OutsideColor = WdColor.wdColorBrown; // Цвет линии
+
+                // Добавление текста в ячейку таблицы
+                table.Cell(1, 1).Range.Text = "Білет:";
+                table.Cell(2, 1).Range.Text = ticketName;
+                table.Cell(3, 1).Range.Text = "Вопрос 1:";
+                table.Cell(4, 1).Range.Text = _txt1.Text;
+                table.Cell(5, 1).Range.Text = "Вопрос 2:";
+                table.Cell(6, 1).Range.Text = _txt2.Text;
+                table.Cell(7, 1).Range.Text = "Вопрос 3:";
+                table.Cell(8, 1).Range.Text = _txt3.Text;
+                table.Cell(9, 1).Range.Text = "Студент:";
+                table.Cell(10, 1).Range.Text = studentName + " " + studentSurname + " " + studentPatronymic;
+                table.Cell(11, 1).Range.Text = "Группа:";
+                table.Cell(12, 1).Range.Text = student.Group.Name;
+            }
+            doc.SaveAs2(Environment.CurrentDirectory + "\\Report.docx");
+            // відкриття документу
+            app.Visible = true;
         }
 
         private void _btnCancel_Click(object sender, RoutedEventArgs e)

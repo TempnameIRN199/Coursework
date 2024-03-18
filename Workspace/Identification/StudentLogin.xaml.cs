@@ -40,25 +40,50 @@ namespace Coursework.Workspace.Identification
                 string[] fullName = usernameInput.Text.Split(' ');
                 string surname = fullName[0];
                 string firstName = fullName[1];
-                string lastName = fullName[2];
-                var student = context.Students.Where(s => s.Surname == surname && s.Name == firstName && s.Patronymic == lastName).FirstOrDefault();
-                if (student != null)
+                if (fullName.Length > 2)
                 {
-                    var group = context.Groups.Where(g => g.Id == student.GroupId).FirstOrDefault();
-                    if (group != null && group.Id == student.GroupId)
+                    string lastName = fullName[2];
+                    var _student = context.Students.Where(s => s.Surname == surname && s.Name == firstName && s.Patronymic == lastName).FirstOrDefault();
+                    if (_student != null)
                     {
-                        UserWindow.User studentWorkspace = new UserWindow.User(student);
-                        studentWorkspace.Show();
-                        this.Visibility = Visibility.Hidden;
+                        var group = context.Groups.Where(g => g.Id == _student.GroupId).FirstOrDefault();
+                        if (group != null && group.Id == _student.GroupId)
+                        {
+                            UserWindow.User studentWorkspace = new UserWindow.User(_student);
+                            studentWorkspace.Show();
+                            this.Visibility = Visibility.Hidden;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Такого студента не существует2");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Такого студента не существует2");
+                        MessageBox.Show("Такого студента не существует1");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Такого студента не существует1");
+                    var student = context.Students.Where(s => s.Surname == surname && s.Name == firstName).FirstOrDefault();
+                    if (student != null)
+                    {
+                        var group = context.Groups.Where(g => g.Id == student.GroupId).FirstOrDefault();
+                        if (group != null && group.Id == student.GroupId)
+                        {
+                            UserWindow.User studentWorkspace = new UserWindow.User(student);
+                            studentWorkspace.Show();
+                            this.Visibility = Visibility.Hidden;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Такого студента не существует2");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Такого студента не существует1");
+                    }
                 }
             }
         }

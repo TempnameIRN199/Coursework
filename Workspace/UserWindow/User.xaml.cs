@@ -180,11 +180,6 @@ namespace Coursework.Workspace.UserWindow
             }
         }
 
-        private void ButtonSave_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void ButtonView_Click(object sender, RoutedEventArgs e)
         {
             ViewWindow viewWindow = new ViewWindow(_ticket, student);
