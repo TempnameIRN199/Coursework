@@ -94,15 +94,15 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="_buttonSelect" Grid.Column="0" Content="Select" FontFamily="Cascadia Mono ExtraLight"
-                VerticalAlignment="Center" HorizontalAlignment="Center" Width="80" Height="40"
-                Style="{StaticResource TransparentButtonStyle}" Click="ButtonSave_Click"/>
+            <Button x:Name="_buttonSelect" Content="Select" FontFamily="Cascadia Mono ExtraLight"
+                VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="80" Height="40"
+                Style="{StaticResource TransparentButtonStyle}" Click="ButtonSave_Click" Margin="0,0,0,-2"/>
             <Button x:Name="_buttonView" Grid.Column="1" Content="View" FontFamily="Cascadia Mono ExtraLight"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Width="80" Height="40"
                 Style="{StaticResource TransparentButtonStyle}" Click="ButtonView_Click"/>
-            <Button x:Name="_buttonStart" Grid.Column="2" Content="Start" FontFamily="Cascadia Mono ExtraLight"
+            <Button x:Name="_buttonExit" Grid.Column="2" Content="Exit" FontFamily="Cascadia Mono ExtraLight"
                 VerticalAlignment="Center" HorizontalAlignment="Center" Width="80" Height="40"
-                Style="{StaticResource TransparentButtonStyle}" Click="ButtonStart_Click"/>
+                Style="{StaticResource TransparentButtonStyle}" Click="ButtonExit_Click"/>
 
         </Grid>
     </Grid>

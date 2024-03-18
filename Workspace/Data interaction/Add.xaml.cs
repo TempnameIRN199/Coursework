@@ -687,11 +687,17 @@ namespace Coursework.Workspace.Data_interaction
                 var discipline = context.Disciplines.Where(x => x.Name == disciplineName).FirstOrDefault();
                 issue.DisciplineId = discipline.Id;
 
-                string ticketName = ((ComboBox)_gridAdded.Children[7]).SelectedItem.ToString();
-                var ticket = context.Tickets.Where(x => x.Name == ticketName).FirstOrDefault();
-                issue.TicketId = ticket.Id;
-
-                issue.ImagePath = ((TextBox)_gridAdded.Children[9]).Text;
+                if (((ComboBox)_gridAdded.Children[7]).SelectedItem != null)
+                {
+                    string ticketName = ((ComboBox)_gridAdded.Children[7]).SelectedItem.ToString();
+                    var ticket = context.Tickets.Where(x => x.Name == ticketName).FirstOrDefault();
+                    issue.TicketId = ticket.Id;
+                }
+                else
+                {
+                    issue.TicketId = null;
+                }
+                //issue.ImagePath = ((TextBox)_gridAdded.Children[9]).Text;
                 if (_selectedImagePath != null)
                 {
                     string projectPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;

@@ -192,12 +192,6 @@ namespace Coursework.Workspace.UserWindow
             this.Visibility = Visibility.Hidden;
         }
 
-        private void ButtonStart_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-
         private void _listView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             using (NintendoContext db = new NintendoContext())
@@ -232,12 +226,23 @@ namespace Coursework.Workspace.UserWindow
                 db.SaveChanges();
             }
             _selectedTicket.Add(_ticket);
+            _textBoxIssue.Text = "";
+            _textBoxDiscepline.Text = "";
+            _textBoxCount.Text = "";
+            Refresh();
         }
 
         private void ButtonShowInfo_Click(object sender, RoutedEventArgs e)
         {
             StudentInfo studentInfoWindow = new StudentInfo(student);
             studentInfoWindow.Visibility = Visibility.Visible;
+            this.Visibility = Visibility.Hidden;
+        }
+
+        private void ButtonExit_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Visibility = Visibility.Visible;
             this.Visibility = Visibility.Hidden;
         }
     }
