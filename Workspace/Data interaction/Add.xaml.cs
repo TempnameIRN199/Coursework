@@ -681,7 +681,6 @@ namespace Coursework.Workspace.Data_interaction
                 {
                     issue.TicketId = null;
                 }
-                //issue.ImagePath = ((TextBox)_gridAdded.Children[9]).Text;
                 if (_selectedImagePath != null)
                 {
                     string projectPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
@@ -747,7 +746,6 @@ namespace Coursework.Workspace.Data_interaction
         {
             using (NintendoContext context = new NintendoContext())
             {
-                // если все поля пустые - выдать ошибку
                 if (((TextBox)_gridAdded.Children[1]).Text == "" || 
                     ((TextBox)_gridAdded.Children[3]).Text == "" || 
                     ((TextBox)_gridAdded.Children[7]).Text == "")

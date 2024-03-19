@@ -65,11 +65,10 @@ namespace Coursework.Workspace.Administrator
             MainWindow mainWindow = new MainWindow();
             mainWindow.Visibility = Visibility.Visible;
         }
-        // переделать *
+
         private void _comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             OpenIssue();
-            //Discipline
             if (_comboBox.SelectedIndex == 0) {
                 _gridView.Columns.Clear();
                 _gridView.Columns.Add(new GridViewColumn { 
@@ -86,7 +85,6 @@ namespace Coursework.Workspace.Administrator
                     _listView.ItemsSource = disciplines.ToList();
                 }
             }
-            //Group 
             else if (_comboBox.SelectedIndex == 1) {
                 
                 _gridView.Columns.Clear();
@@ -105,10 +103,8 @@ namespace Coursework.Workspace.Administrator
                     _listView.ItemsSource = groups.ToList();
                 }
             }
-            //Issue
             else if (_comboBox.SelectedIndex == 2)
             {
-                //Issue - працює
                 _gridView.Columns.Clear();
                 _gridView.Columns.Add(new GridViewColumn { Header = "Essence", DisplayMemberBinding = new Binding("EssenceOfIssue"), Width = 150 });
                 _gridView.Columns.Add(new GridViewColumn { Header = "Discipline", DisplayMemberBinding = new Binding("Discipline.Name"), Width = 150 });
@@ -134,7 +130,6 @@ namespace Coursework.Workspace.Administrator
                     }
                     _listView.ItemsSource = issues.ToList();
                 }
-                // залить в strType список типів завдань
                 using (NintendoContext db = new NintendoContext())
                 {
                     var issueTypes = db.Types;
@@ -153,7 +148,6 @@ namespace Coursework.Workspace.Administrator
                 Dispatcher.Invoke(new Action(() => _comboBoxSearch.ItemsSource = strType));
                 Dispatcher.Invoke(new Action(() => _comboBoxSearch2.ItemsSource = strDiscip));
             }
-            //Result
             else if (_comboBox.SelectedIndex == 3)
             {
                 _gridView.Columns.Clear();
@@ -178,7 +172,6 @@ namespace Coursework.Workspace.Administrator
                     _listView.ItemsSource = issues.ToList();
                 }
             }
-            //Student
             else if (_comboBox.SelectedIndex == 4)
             {
                 _gridView.Columns.Clear();
@@ -201,13 +194,10 @@ namespace Coursework.Workspace.Administrator
                     _listView.ItemsSource = issues.ToList();
                 }
             }
-            //Ticket
             else if (_comboBox.SelectedIndex == 5)
             {
-                //Ticket
                 _gridView.Columns.Clear();
                 _gridView.Columns.Add(new GridViewColumn { Header = "Name", DisplayMemberBinding = new Binding("Name"), Width = 150 });
-                //_gridView.Columns.Add(new GridViewColumn { Header = "Issue", DisplayMemberBinding = new Binding("Issue.EssenceOfIssue"), Width = 150 });
                 _listView.View = _gridView;
                 using (NintendoContext db = new NintendoContext())
                 {
@@ -219,7 +209,6 @@ namespace Coursework.Workspace.Administrator
                     _listView.ItemsSource = tickets.ToList();
                 }
             }
-            //Type
             else if (_comboBox.SelectedIndex == 6)
             {
                 _gridView.Columns.Clear();
@@ -235,7 +224,6 @@ namespace Coursework.Workspace.Administrator
                     _listView.ItemsSource = issueTypes.ToList();
                 }
             }
-            // User
             else if (_comboBox.SelectedIndex == 7)
             {
                 _gridView.Columns.Clear();
@@ -254,10 +242,9 @@ namespace Coursework.Workspace.Administrator
                 }
             }
         }
-        // переделать
+
         private void _listView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //Discipline
             if (_comboBox.SelectedIndex == 0)
             {
                 if (_listView.SelectedItem != null)
@@ -272,7 +259,6 @@ namespace Coursework.Workspace.Administrator
                     MessageBox.Show("Выберите дисциплину для редактирования");
                 }
             }
-            //Group 
             else if (_comboBox.SelectedIndex == 1)
             {
                 if (_listView.SelectedItem != null)
@@ -287,10 +273,8 @@ namespace Coursework.Workspace.Administrator
                     MessageBox.Show("Выберите группу для редактирования");
                 }
             }
-            //Issue
             else if (_comboBox.SelectedIndex == 2)
             {
-                //Issue
                 if (_listView.SelectedItem != null)
                 {
                     using (NintendoContext db = new NintendoContext())
@@ -317,10 +301,8 @@ namespace Coursework.Workspace.Administrator
                     MessageBox.Show("Выберите задание для редактирования1");
                 }
             }
-            //Result
             else if (_comboBox.SelectedIndex == 3)
             {
-                //Result
                 if (_listView.SelectedItem != null)
                 {
                     Result result = (Result)_listView.SelectedItem;
@@ -333,10 +315,8 @@ namespace Coursework.Workspace.Administrator
                     MessageBox.Show("Выберите результат для редактирования");
                 }
             }
-            //Student
             else if (_comboBox.SelectedIndex == 4)
             {
-                //Student
                 if (_listView.SelectedItem != null)
                 {
                     Student student = (Student)_listView.SelectedItem;
@@ -349,7 +329,6 @@ namespace Coursework.Workspace.Administrator
                     MessageBox.Show("Выберите студента для редактирования");
                 }
             }
-            //Ticket
             else if (_comboBox.SelectedIndex == 5)
             {
                 if (_listView.SelectedItem != null)
@@ -364,10 +343,8 @@ namespace Coursework.Workspace.Administrator
                     MessageBox.Show("Выберите пользователя для редактирования");
                 }
             }
-            //Type
             else if (_comboBox.SelectedIndex == 6)
             {
-                //IssueType
                 if (_listView.SelectedItem != null)
                 {
                     Database.Type issueType = (Database.Type)_listView.SelectedItem;
@@ -380,10 +357,8 @@ namespace Coursework.Workspace.Administrator
                     MessageBox.Show("Выберите тип задания для редактирования");
                 }
             }
-            //User
             else if (_comboBox.SelectedIndex == 7)
             {
-                //User
                 if (_listView.SelectedItem != null)
                 {
                     User user = (User)_listView.SelectedItem;
@@ -405,69 +380,53 @@ namespace Coursework.Workspace.Administrator
                 _listView.UnselectAll();
             }
         }
-        // переделать
+
         private void _btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            //Discipline
             if (_comboBox.SelectedIndex == 0)
             {
-                //Discipline
                 Add addWindow = new Add("Discipline");
                 addWindow.ShowDialog();
                 _comboBox_SelectionChanged(null, null);
             }
-            //Group 
             else if (_comboBox.SelectedIndex == 1)
             {
-                //Group
                 Add addWindow = new Add("Group");
                 addWindow.ShowDialog();
                 _comboBox_SelectionChanged(null, null);
             }
-            //Issue
             else if (_comboBox.SelectedIndex == 2)
             {
-                //Issue
                 Add addWindow = new Add("Issue");
                 addWindow.ShowDialog();
                 _comboBox_SelectionChanged(null, null);
             }
-            //Result
             else if (_comboBox.SelectedIndex == 3)
             {
-                //Result
                 Add addWindow = new Add("Result");
                 addWindow.ShowDialog();
                 _comboBox_SelectionChanged(null, null);
             }
-            //Student
             else if (_comboBox.SelectedIndex == 4)
             {
-                //Student
                 Add addWindow = new Add("Student");
                 addWindow.ShowDialog();
                 _comboBox_SelectionChanged(null, null);
             }
-            //Ticket
             else if (_comboBox.SelectedIndex == 5)
             {
-                //Ticket
                 Add addWindow = new Add("Ticket");
                 addWindow.ShowDialog();
                 _comboBox_SelectionChanged(null, null);
             }
-            //Type
             else if (_comboBox.SelectedIndex == 6)
             {
-                //IssueType
                 Add addWindow = new Add("Type");
                 addWindow.ShowDialog();
                 _comboBox_SelectionChanged(null, null);
             }
-            //User
             else if (_comboBox.SelectedIndex == 7)
             {
-                //User
                 Add addWindow = new Add("User");
                 addWindow.ShowDialog();
                 _comboBox_SelectionChanged(null, null);
@@ -476,7 +435,6 @@ namespace Coursework.Workspace.Administrator
 
         private void _btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            //Discipline
             if (_comboBox.SelectedIndex == 0)
             {
                 if (_listView.SelectedItem != null)
@@ -505,7 +463,6 @@ namespace Coursework.Workspace.Administrator
                     MessageBox.Show("Виберіть дисципліну для видалення");
                 }
             }
-            //Group
             else if (_comboBox.SelectedIndex == 1)
             {
                 if (_listView.SelectedItem != null)
@@ -534,7 +491,6 @@ namespace Coursework.Workspace.Administrator
                     MessageBox.Show("Виберіть групу для видалення");
                 }
             }
-            //Issue
             else if (_comboBox.SelectedIndex == 2)
             {
                 if (_listView.SelectedItem != null)
@@ -563,7 +519,6 @@ namespace Coursework.Workspace.Administrator
                     MessageBox.Show("Виберіть завдання для видалення");
                 }
             }
-            //Result
             else if (_comboBox.SelectedIndex == 3)
             {
                 if (_listView.SelectedItem != null)
@@ -592,7 +547,6 @@ namespace Coursework.Workspace.Administrator
                     MessageBox.Show("Виберіть результат для видалення");
                 }
             }
-            //Student
             else if (_comboBox.SelectedIndex == 4)
             {
                 if (_listView.SelectedItem != null)
@@ -621,7 +575,6 @@ namespace Coursework.Workspace.Administrator
                     MessageBox.Show("Виберіть студента для видалення");
                 }
             }
-            //Ticket
             else if (_comboBox.SelectedIndex == 5)
             {
                 if (_listView.SelectedItem != null)
@@ -650,7 +603,6 @@ namespace Coursework.Workspace.Administrator
                     MessageBox.Show("Виберіть білет для видалення");
                 }
             }
-            //Type
             else if (_comboBox.SelectedIndex == 6)
             {
                 if (_listView.SelectedItem != null)
@@ -679,7 +631,6 @@ namespace Coursework.Workspace.Administrator
                     MessageBox.Show("Виберіть тип завдання для видалення");
                 }
             }
-            //User
             else if (_comboBox.SelectedIndex == 7)
             {
                 if (_listView.SelectedItem != null)
@@ -813,7 +764,6 @@ namespace Coursework.Workspace.Administrator
                         }
                         _listView.ItemsSource = issues.ToList();
                     }
-                    // занести в _listBox запись о дисциплине
                     if (listDiscip.All(x => x.Name != discip.Name))
                     {
                         listDiscip.Add(discip);
@@ -826,7 +776,6 @@ namespace Coursework.Workspace.Administrator
                         }
                     }
                     _textBoxSearch2.Text = "";
-                    // подготовить _comboBoxSearch к новому поиску
                     listDiscip.Clear();
                     strDiscip.Clear();
                     _comboBoxSearch2.ItemsSource = null;

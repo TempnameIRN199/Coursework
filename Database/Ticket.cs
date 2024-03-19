@@ -14,9 +14,5 @@ namespace Coursework.Database
 
         [Required]
         public string Name { get; set; }
-
-        //[Required]
-        //public int IssueId { get; set; }
-        //public virtual Issue Issue { get; set; }
     }
 }

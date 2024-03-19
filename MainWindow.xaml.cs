@@ -109,10 +109,7 @@ namespace Coursework
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            //App app = (App)Application.Current;
-            //app.Shutdown();
             Process.GetCurrentProcess().Kill();
-
         }
     }
 }

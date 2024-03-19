@@ -86,16 +86,13 @@ namespace Coursework.Workspace.UserWindow
                 var studentSurname = db.Students.Where(x => x.UserId == student.UserId).Select(x => x.Surname).FirstOrDefault();
                 var studentPatronymic = db.Students.Where(x => x.UserId == student.UserId).Select(x => x.Patronymic).FirstOrDefault();
 
-                // Создание таблицы
                 Microsoft.Office.Interop.Word.Table table = doc.Tables.Add(doc.Range(), 12, 1);
-                table.Borders.Enable = 1; // Включаем отображение границ таблицы
+                table.Borders.Enable = 1;
 
-                // Установка стиля, цвета и толщины рамки вокруг ячейки
-                table.Borders.OutsideLineStyle = WdLineStyle.wdLineStyleDouble; // Стиль линии
-                table.Borders.OutsideLineWidth = WdLineWidth.wdLineWidth150pt; // Толщина линии
-                table.Borders.OutsideColor = WdColor.wdColorBrown; // Цвет линии
+                table.Borders.OutsideLineStyle = WdLineStyle.wdLineStyleDouble;
+                table.Borders.OutsideLineWidth = WdLineWidth.wdLineWidth150pt;
+                table.Borders.OutsideColor = WdColor.wdColorBrown;
 
-                // Добавление текста в ячейку таблицы
                 table.Cell(1, 1).Range.Text = "Білет:";
                 table.Cell(2, 1).Range.Text = ticketName;
                 table.Cell(3, 1).Range.Text = "Вопрос 1:";

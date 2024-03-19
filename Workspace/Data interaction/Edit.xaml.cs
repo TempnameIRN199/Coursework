@@ -977,7 +977,6 @@ namespace Coursework.Workspace.Data_interaction
                 {
                     using (NintendoContext db = new NintendoContext())
                     {
-                        // если такой пользователь уже существует
                         string login = (_gridEdit.Children[1] as TextBox).Text;
                         var checkUser = db.Users.Where(u => u.Login == login).FirstOrDefault();
 
